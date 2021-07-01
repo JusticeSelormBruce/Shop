@@ -33,17 +33,18 @@
               </div>
               <div class="col-lg-3 col-md-8 col-sm-12"></div>
           </div>
-          <div class="row py-5">
+         <div id="productTable">
+          <div class="row py-2">
             <div class="col-lg-3 col-md-8 col-sm-12"></div>
             <div class="col-lg-6 col-md-8 col-sm-12">
-               <table class="table" id="productTable">
+               <table class="table" >
                  <thead>
                    <tr>
                      <th>Product Name</th>
                      <th>Quantity</th>
                      <th>Unit Price</th>
                      <th>Datetime</th>
-                     <th>total</th>
+                     <th></th>
                    </tr>
                  </thead>
                  <tbody>
@@ -61,17 +62,27 @@
                      <td>{{$item->price}}</td>
                      <td>{{$item->datetime}}</td>
                      <td>{{$item->total}}</td>
+                    
                    </tr>
                        
                    @endforeach
+                  
                  </tbody>
-
                </table>
+               
   
             </div>
             <div class="col-lg-3 col-md-8 col-sm-12"></div>
         </div>
 
+        <div class="row">
+          <div class="col-lg-3 col-md-8 col-sm-12"></div>
+          <div class="col-lg-6 col-md-8 col-sm-12"><div class="text-end">
+           <h6> SUM[{{$sorted->values()->sum('total')}}]</h6>
+          </div></div>
+          <div class="col-lg-3 col-md-8 col-sm-12"></div>
+        </div>
+         </div>
 
 
            
@@ -100,7 +111,10 @@
         },
         success:function(response){
           console.log(response);
-          document.getElementById('productTable').load();
+          
+          setTimeout(function(){
+   $( "#productTable" ).load( "http://127.0.0.1:8000 #productTable" );
+}, 100); 
         },
         
        });
