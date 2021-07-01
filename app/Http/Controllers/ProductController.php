@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-       return view('product');
+        return view('product');
     }
 
     /**
@@ -35,7 +35,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file_name = "products.json";
+        $data =Product::validateProductFormData();
+        if (file_exists($file_name)) {
+            Product::AppendDataToProduts($data);
+        } else {
+            $_SESSION['message'] = 'file does not exist ';
+        }
+        return response()->json(['code' => 200, 'message' => 'Post Created successfully'], 200);
+
     }
 
     /**
